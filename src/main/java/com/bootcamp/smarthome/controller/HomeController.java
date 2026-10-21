@@ -90,14 +90,15 @@ public class HomeController {
             }
 
             if (!device.isOnline()) {
-                logger.warn("Device '{}' is offline - command skipped.", deviceId);
                 throw new DeviceOfflineException("Device '" + deviceId + "' is offline");
             }
 
             device.executeCommand(command);
             logger.info("Command '{}' executed successfully on device '{}'", command, deviceId);
+        } catch (DeviceOfflineException e) {
+            logger.warn("Device '{}' is offline - command skipped.", deviceId);
         } catch (HomeAutomationException e) {
-            logger.error("Command '{}' failed for device '{}'", fullCommand, deviceId, e);
+            logger.error("Command '{}' failed for device '{}'", fullCommand, deviceId);
             throw new HomeAutomationException("Command '" + fullCommand + "' failed for device '" + deviceId + "'", e);
         } finally {
             System.out.println("Command processing ended for device " + deviceId);
