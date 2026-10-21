@@ -31,8 +31,7 @@ public class SmartLock extends Device {
      * Validates the supplied PIN against the stored PIN.
      */
     public void validatePin(String pin) throws InvalidCommandException {
-        // TODO: null check is skipper for now because for some reason its planned task 4 bug
-        if (pin.equals(storedPin)) {
+        if (pin != null && pin.equals(storedPin)) {
             isLocked = false;
             System.out.println(getName() + " unlocked successfully.");
         } else {
