@@ -98,7 +98,6 @@ public class HomeController {
         } catch (DeviceOfflineException e) {
             logger.warn("Device '{}' is offline - command skipped.", deviceId);
         } catch (HomeAutomationException e) {
-            logger.error("Command '{}' failed for device '{}'", fullCommand, deviceId);
             throw new HomeAutomationException("Command '" + fullCommand + "' failed for device '" + deviceId + "'", e);
         } finally {
             System.out.println("Command processing ended for device " + deviceId);

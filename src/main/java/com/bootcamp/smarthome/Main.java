@@ -7,6 +7,8 @@ import com.bootcamp.smarthome.device.SmartLock;
 import com.bootcamp.smarthome.device.SmartThermostat;
 import com.bootcamp.smarthome.exception.DeviceNotFoundException;
 import com.bootcamp.smarthome.exception.HomeAutomationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Entry point for the Smart Home Controller demo.
@@ -15,6 +17,8 @@ import com.bootcamp.smarthome.exception.HomeAutomationException;
  * exercise normal operation as well as edge cases and error conditions.
  */
 public class Main {
+
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {
 
@@ -97,9 +101,6 @@ public class Main {
     }
 
     private static void printError(Exception e) {
-        System.out.println("ERROR: " + e.getMessage());
-        if (e.getCause() != null) {
-            System.out.println("Caused by: " + e.getCause().getMessage());
-        }
+        logger.error(e.getMessage(), e);
     }
 }
