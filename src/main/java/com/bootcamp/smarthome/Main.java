@@ -5,6 +5,7 @@ import com.bootcamp.smarthome.device.Device;
 import com.bootcamp.smarthome.device.SmartLight;
 import com.bootcamp.smarthome.device.SmartLock;
 import com.bootcamp.smarthome.device.SmartThermostat;
+import com.bootcamp.smarthome.exception.DeviceNotFoundException;
 import com.bootcamp.smarthome.exception.HomeAutomationException;
 
 /**
@@ -87,7 +88,7 @@ public class Main {
         System.out.println("\n=== Scenario 7: Find non-existent device ===");
         try {
             controller.sendCommand("SENSOR_99 TURN_ON");
-        } catch (HomeAutomationException e) {
+        } catch (HomeAutomationException | DeviceNotFoundException e) {
             printError(e);
         }
 
@@ -95,7 +96,7 @@ public class Main {
         controller.printAllDevices();
     }
 
-    private static void printError(HomeAutomationException e) {
+    private static void printError(Exception e) {
         System.out.println("ERROR: " + e.getMessage());
         if (e.getCause() != null) {
             System.out.println("Caused by: " + e.getCause().getMessage());
